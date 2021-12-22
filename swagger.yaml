@@ -1,0 +1,342 @@
+openapi: 3.0.0
+info:
+  title: 'Bookmarks API resources'
+  contact:
+    email: youssef.benhssaien@gmail.com
+  version: '0.1'
+paths:
+  /api/bookmarks:
+    get:
+      tags:
+        - bookmarks
+      operationId: 'App\Controller\BookmarkController::allBookmarks'
+      responses:
+        '200':
+          description: 'All bookmarks list'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookmarkRead'
+    post:
+      tags:
+        - bookmarks
+      operationId: 'App\Controller\BookmarkController::addBookmark'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookmarkCreate'
+      responses:
+        '200':
+          description: 'Created bookmark details'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookmarkRead'
+        '400':
+          description: 'Invalid user data provided'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorsFormat'
+        '500':
+          description: 'Bookmark cannot be created for an unkown reason'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorFormat'
+  '/api/bookmarks/{bookmark}':
+    get:
+      tags:
+        - bookmarks
+      operationId: 'App\Controller\BookmarkController::getBookmark'
+      responses:
+        '200':
+          description: 'Bookmark details'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookmarkRead'
+    put:
+      tags:
+        - bookmarks
+      operationId: 'App\Controller\BookmarkController::updateBookmark'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookmarkUpdate'
+      responses:
+        '200':
+          description: 'Updated bookmark details'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookmarkRead'
+        '400':
+          description: 'Invalid user data provided'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorsFormat'
+        '500':
+          description: 'Bookmark cannot be updated for an unkown reason'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorFormat'
+    delete:
+      tags:
+        - bookmarks
+      operationId: 'App\Controller\BookmarkController::deleteBookmark'
+      responses:
+        '204':
+          description: 'Bookmark deleted'
+        '500':
+          description: 'Bookmark cannot be deleted for an unkown reason'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorFormat'
+  '/api/bookmarks/{bookmark}/tags':
+    get:
+      tags:
+        - tags
+      operationId: 'App\Controller\BookmarkTagsController::getBookmarkTags'
+      responses:
+        '200':
+          description: 'All bookmark tags list'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagRead'
+    post:
+      tags:
+        - tags
+      operationId: 'App\Controller\BookmarkTagsController::addBookmarkTag'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagUpdate'
+      responses:
+        '200':
+          description: 'All bookmark tags list with the created tag'
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TagRead'
+        '400':
+          description: 'Invalid user data provided'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorsFormat'
+        '500':
+          description: 'Tag cannot be created for an unkown reason'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorFormat'
+  '/api/bookmarks/{bookmark}/tags/{tag}':
+    get:
+      tags:
+        - tags
+      operationId: 'App\Controller\BookmarkTagsController::getBookmarkTag'
+      responses:
+        '200':
+          description: 'Bookmark tag details'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagRead'
+        '400':
+          description: 'Tag doesn''t belong to the bookmark'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorFormat'
+    put:
+      tags:
+        - tags
+      operationId: 'App\Controller\BookmarkTagsController::updateBookmarkTag'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagUpdate'
+      responses:
+        '200':
+          description: 'Updated bookmark details'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagRead'
+        '400':
+          description: 'Invalid user data provided or tag doesn''t belong to the bookmark'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorsFormat'
+        '500':
+          description: 'Tag cannot cannot be updated for an unkown reason'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorFormat'
+    delete:
+      tags:
+        - tags
+      operationId: 'App\Controller\BookmarkTagsController::deleteBookmarkTag'
+      responses:
+        '204':
+          description: 'Tag deleted'
+        '400':
+          description: 'Tag doesn''t belong to the bookmark'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorFormat'
+        '500':
+          description: 'Tag cannot be deleted for an unkown reason'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorFormat'
+components:
+  schemas:
+    ErrorsFormat:
+      properties:
+        errors:
+          description: 'Errors messages'
+          type: array
+          items:
+            type: string
+      type: object
+    ErrorFormat:
+      properties:
+        error:
+          description: 'Error message'
+          type: string
+    BookmarkCreate:
+      properties:
+        bookmark-url:
+          description: 'The url to bookmark'
+          type: string
+      type: object
+    BookmarkUpdate:
+      properties:
+        url:
+          description: 'The main url (video, image, ..) in the bookmarked page'
+          type: string
+        title:
+          description: 'The title of bookmarked page'
+          type: string
+        author:
+          description: 'The author of bookmarked page'
+          type: string
+      type: object
+      allOf:
+        -
+          $ref: '#/components/schemas/BookmarkImageUpdate'
+        -
+          $ref: '#/components/schemas/BookmarkVideoUpdate'
+    BookmarkRead:
+      properties:
+        url:
+          description: 'The main url (video, image, ..) in the bookmarked page'
+          type: string
+        title:
+          description: 'The title of bookmarked page'
+          type: string
+        author:
+          description: 'The author of bookmarked page'
+          type: string
+        tags:
+          description: 'The list of keywords to identify the bookmarked page'
+          type: array
+          items:
+            $ref: '#/components/schemas/TagRead'
+      type: object
+      allOf:
+        -
+          $ref: '#/components/schemas/BookmarkCreate'
+        -
+          $ref: '#/components/schemas/PublicResource'
+        -
+          $ref: '#/components/schemas/UpdatableResource'
+      oneOf:
+        -
+          $ref: '#/components/schemas/BookmarkImageRead'
+        -
+          $ref: '#/components/schemas/BookmarkVideoRead'
+    BookmarkImageRead:
+      allOf:
+        -
+          $ref: '#/components/schemas/DimensionalResourceRead'
+        -
+          $ref: '#/components/schemas/BookmarkCreate'
+    BookmarkImageUpdate:
+      allOf:
+        -
+          $ref: '#/components/schemas/DimensionalResourceUpdate'
+    BookmarkVideoRead:
+      allOf:
+        -
+          $ref: '#/components/schemas/DimensionalResourceRead'
+        -
+          $ref: '#/components/schemas/BookmarkCreate'
+        -
+          properties:
+            duration:
+              description: 'The video duration in seconds'
+              type: number
+          type: object
+    BookmarkVideoUpdate:
+      properties:
+        duration:
+          description: 'The video duration in seconds'
+          type: number
+      type: object
+      allOf:
+        -
+          $ref: '#/components/schemas/DimensionalResourceUpdate'
+    TagRead:
+      allOf:
+        -
+          $ref: '#/components/schemas/PublicResource'
+        -
+          $ref: '#/components/schemas/TagUpdate'
+    TagUpdate:
+      properties:
+        name:
+          description: 'The tag keyword'
+          type: string
+      type: object
+    DimensionalResourceRead:
+      properties:
+        height:
+          description: 'The media height in pixels'
+          type: number
+        width:
+          description: 'The media width in pixels'
+          type: number
+      type: object
+    DimensionalResourceUpdate:
+      $ref: '#/components/schemas/DimensionalResourceRead'
+    PublicResource:
+      properties:
+        id:
+          description: 'The resource identifier'
+          type: string
+      type: object
+    UpdatableResource:
+      properties:
+        createDate:
+          description: 'The create date'
+          type: string
+        updateDate:
+          description: 'The update date'
+          type: string
+      type: object

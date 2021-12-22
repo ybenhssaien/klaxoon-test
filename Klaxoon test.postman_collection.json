@@ -1,0 +1,145 @@
+{
+	"info": {
+		"_postman_id": "98fb12d1-8102-4d7f-b1a4-2d0f483b3fe8",
+		"name": "Klaxoon test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Bookmark",
+			"item": [
+				{
+					"name": "Tags",
+					"item": [
+						{
+							"name": "GET bookmark tag",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://127.0.0.1:8000/api/bookmarks/3344f1e6-84ab-11eb-97c5-0242ac130002/tags/33450008-84ab-11eb-97c5-0242ac130002"
+							},
+							"response": []
+						},
+						{
+							"name": "POST bookmark tag",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n    {\r\n        \"name\": \"tag1\"\r\n    },\r\n    {\r\n        \"name\": \"tag2\"\r\n    }\r\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://127.0.0.1:8000/api/bookmarks/3344f1e6-84ab-11eb-97c5-0242ac130002/tags"
+							},
+							"response": []
+						},
+						{
+							"name": "PUT bookmark tag",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"test updated\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://127.0.0.1:8000/api/bookmarks/3344f1e6-84ab-11eb-97c5-0242ac130002/tags/ee484824-84bb-11eb-97c5-0242ac130002"
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE bookmark tag",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": "http://127.0.0.1:8000/api/bookmarks/3344f1e6-84ab-11eb-97c5-0242ac130002/tags/33450008-84ab-11eb-97c5-0242ac130002"
+							},
+							"response": []
+						},
+						{
+							"name": "GET bookmark tags",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://127.0.0.1:8000/api/bookmarks/3344f1e6-84ab-11eb-97c5-0242ac130002/tags"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET bookmarks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:8000/api/bookmarks"
+					},
+					"response": []
+				},
+				{
+					"name": "GET bookmark",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:8000/api/bookmarks/3344f1e6-84ab-11eb-97c5-0242ac130002"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE bookmark",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://127.0.0.1:8000/api/bookmarks/0575ffaf-84a4-11eb-97c5-0242ac130002"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT bookmark",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"url\": \"test updated\",\r\n    \"title\" : \"\",\r\n    \"author\": \"\",\r\n    \"width\": 0,\r\n    \"height\": 0,\r\n    \"duration\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:8000/api/bookmarks/3344f1e6-84ab-11eb-97c5-0242ac130002"
+					},
+					"response": []
+				},
+				{
+					"name": "POST bookmark",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bookmark-url\": \"test updated\",\r\n    \"title\" : \"\",\r\n    \"author\": \"\",\r\n    \"width\": 0,\r\n    \"height\": 0,\r\n    \"duration\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:8000/api/bookmarks"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
